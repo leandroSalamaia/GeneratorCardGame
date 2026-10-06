@@ -1,0 +1,36 @@
+# Dependencies and builds
+node_modules/
+dist/
+coverage/
+.vite/
+
+# Local experiments, previews and generated exports
+scratch/
+exports/
+output/
+*.log
+*.tmp
+*.temp
+\!l.includes('Products')).slice(0
+
+# Credentials and machine-specific configuration
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+
+# Python caches and local AI environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.cache/
+
+# Editor and operating system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini

@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Cartas - The Lord of the Rings: The Card Game</title>
+  <meta name="description" content="Gerador de cartas e proxies em alta resolução para The Lord of the Rings LCG baseado nos templates oficiais.">
+  
+  <!-- Google Fonts for Middle-earth / Tolkien Aesthetics -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400&family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600;1,700&family=MedievalSharp&family=Uncial+Antiqua&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/src/style.css">
+  <link rel="stylesheet" href="/assets/fonts/stats.css">
+</head>
+<body>
+  <div id="app" class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-brand">
+        <div class="ring-icon">💍</div>
+        <div>
+          <h1 class="brand-title">The Lord of the Rings LCG</h1>
+          <span class="brand-subtitle">Gerador de Cartas & Proxies em Alta Resolução</span>
+        </div>
+      </div>
+      
+      <div class="header-actions">
+        <button id="btn-open-translation-settings" class="btn btn-secondary" title="Configurações de Tradução com IA (Google Gemini / OpenAI)">
+          <span class="icon">🤖</span> Tradução IA
+        </button>
+        <button id="btn-open-importer" class="btn btn-secondary">
+          <span class="icon">🐻</span> Importar do Hall of Beorn
+        </button>
+        <button id="btn-open-deck" class="btn btn-secondary">
+          <span class="icon">📦</span> Deck / Folha (<span id="deck-count">0</span>)
+        </button>
+        <button id="btn-save-card" class="btn btn-secondary">
+          <span class="icon">💾</span> Salvar Carta
+        </button>
+        <button id="btn-add-to-deck" class="btn btn-primary">
+          <span class="icon">➕</span> Adicionar ao Deck
+        </button>
+        <button id="btn-download-png" class="btn btn-gold">
+          <span class="icon">📥</span> Baixar PNG (300 DPI)
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="workspace">
+      <!-- Left Panel: Form & Controls -->
+      <aside class="panel-controls">
+        <div class="panel-tabs">
+          <button class="tab-btn active" data-tab="tab-general">Tipo & Esfera</button>
+          <button class="tab-btn" data-tab="tab-text">Textos & Regras</button>
+          <button class="tab-btn" data-tab="tab-art">Arte & Ilustração</button>
+          <button class="tab-btn" data-tab="tab-presets">Modelos Salvos</button>
+        </div>
+
+        <div class="panel-content">
+          <section class="layout-preset-panel" aria-labelledby="layout-preset-title">
+            <strong id="layout-preset-title">Layout de Herói</strong>
+            <p>Salve posição, escala e rotação da arte e os ajustes de posição dos atributos para este tipo de carta.</p>
+            <div class="layout-preset-actions">
+              <button type="button" class="btn btn-gold btn-sm" id="btn-save-type-layout">Salvar layout de Herói</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-apply-type-layout" disabled>Aplicar salvo</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-remove-type-layout" disabled>Excluir salvo</button>
+            </div>
+            <p id="layout-preset-status" role="status" aria-live="polite">Nenhum layout salvo para este tipo.</p>
+          </section>
+          <!-- TAB 1: General (Type, Sphere, Stats) -->
+          <div id="tab-general" class="tab-pane active">
+            <div class="control-group">
+              <label class="control-label">Tipo de Carta</label>
+              <div class="grid-types">
+                <button type="button" class="type-card-btn active" data-type="hero">
+                  <span class="type-icon">👑</span>
+                  <span class="type-name">Herói</span>
+                  <span class="type-desc">Hero</span>
+                </button>
+                <button type="button" class="type-card-btn" data-type="ally">
+                  <span class="type-icon">🛡️</span>
+                  <span class="type-name">Aliado</span>
+                  <span class="type-desc">Ally</span>
+                </button>
+                <button type="button" class="type-card-btn" data-type="attachment">
+                  <span class="type-icon">🗡️</span>
+                  <span class="type-name">Acessório</span>
+                  <span class="type-desc">Attachment</span>
+                </button>
+                <button type="button" class="type-card-btn" data-type="event">
+                  <span class="type-icon">⚡</span>
+                  <span class="type-name">Evento</span>
+                  <span class="type-desc">Event</span>
+                </button>
+                <button type="button" class="type-card-btn" data-type="enemy">
+                  <span class="type-icon">🐺</span>
+                  <span class="type-name">Inimigo</span>
+                  <span class="type-desc">Enemy</span>
+                </button>
+                <button type="button" class="type-card-btn" data-type="location">
+                  <span class="type-icon">🏰</span>
+                  <span class="type-name">Local</span>
+                  <span class="type-desc">Location</span>
+                </button>
+                <button type="button" class="type-card-btn" data-type="treachery">
+                  <span class="type-icon">💀</span>
+                  <span class="type-name">Traição</span>
+                  <span class="type-desc">Treachery</span>
+                </button>
+                <button type="button" class="type-card-btn" data-type="objective">
+                  <span class="type-icon">🏆</span>
+                  <span class="type-name">Objetivo</span>
+                  <span class="type-desc">Objective</span>
+                </button>
+                <button type="button" class="type-card-btn" data-type="treasure">
+                  <span class="type-icon">💍</span>
+                  <span class="type-name">Tesouro</span>
+                  <span class="type-desc">Treasure</span>
+                </button>
+                <button type="button" class="type-card-btn" data-type="quest">
+                  <span class="type-icon">📜</span>
+                  <span class="type-name">Missão</span>
+                  <span class="type-desc">Quest</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Spheres Selector (Hero, Ally, Attachment, Event) -->
+            <div id="player-controls" class="section-box">
+              <label class="control-label">Esfera da Carta</label>
+              <div class="grid-spheres">
+                <button type="button" class="sphere-btn active" data-sphere="leadership">
+                  <span class="sphere-dot leadership"></span> Liderança (Leadership)
+                </button>
+                <button type="button" class="sphere-btn" data-sphere="tactics">
+                  <span class="sphere-dot tactics"></span> Táticas (Tactics)
+                </button>
+                <button type="button" class="sphere-btn" data-sphere="spirit">
+                  <span class="sphere-dot spirit"></span> Espírito (Spirit)
+                </button>
+                <button type="button" class="sphere-btn" data-sphere="lore">
+                  <span class="sphere-dot lore"></span> Conhecimento (Lore)
+                </button>
+                <button type="button" class="sphere-btn" data-sphere="neutral">
+                  <span class="sphere-dot neutral"></span> Neutro (Neutral)
+                </button>
+              </div>
+
+              <!-- Attachment / Ally / Event / Treasure Cost -->
+              <div class="form-row mt-3" id="cost-row">
+                <div class="form-col">
+                  <label for="input-cost" class="control-label">Custo de Recurso</label>
+                  <input type="text" id="input-cost" class="form-input text-center font-bold" value="1" maxlength="3">
+                </div>
+                <div class="form-col" id="unique-toggle-container">
+                  <label class="control-label">Carta Única</label>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="input-unique" checked>
+                    <span class="slider"></span>
+                    <span class="toggle-text">★ Carta Única</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Hero & Ally Stats Row -->
+              <div class="form-row mt-3" id="hero-stats-row">
+                <div class="form-col" id="threat-cost-col">
+                  <label for="input-threat-cost" class="control-label">Ameaça Inicial</label>
+                  <input type="text" id="input-threat-cost" class="form-input text-center font-bold" value="12" maxlength="3">
+                </div>
+                <div class="form-col">
+                  <label for="input-hero-willpower" class="control-label">Vontade</label>
+                  <input type="text" id="input-hero-willpower" class="form-input text-center font-bold" value="2" maxlength="2">
+                </div>
+                <div class="form-col">
+                  <label for="input-hero-attack" class="control-label">Ataque</label>
+                  <input type="text" id="input-hero-attack" class="form-input text-center font-bold" value="3" maxlength="2">
+                </div>
+                <div class="form-col">
+                  <label for="input-hero-defense" class="control-label">Defesa</label>
+                  <input type="text" id="input-hero-defense" class="form-input text-center font-bold" value="2" maxlength="2">
+                </div>
+                <div class="form-col">
+                  <label for="input-hero-health" class="control-label">Vida</label>
+                  <input type="text" id="input-hero-health" class="form-input text-center font-bold" value="5" maxlength="2">
+                </div>
+              </div>
+
+              <!-- Hero Type Banner Row (HERÓI / HERO) -->
+              <div class="control-group mt-3" id="hero-banner-container">
+                <label for="input-hero-banner" class="control-label">Texto do Banner Inferior (Hero Type Banner)</label>
+                <input type="text" id="input-hero-banner" class="form-input text-center font-bold" value="HERÓI" placeholder="Ex: HERÓI ou HERO">
+              </div>
+            </div>
+
+            <!-- Enemy Stats Box -->
+            <div id="enemy-controls" class="section-box hidden">
+              <label class="control-label">Atributos do Inimigo</label>
+              <div class="form-row">
+                <div class="form-col">
+                  <label for="input-engagement-threat" class="control-label">Engajamento</label>
+                  <input type="text" id="input-engagement-threat" class="form-input text-center font-bold" value="30" maxlength="3">
+                </div>
+                <div class="form-col">
+                  <label for="input-enemy-threat" class="control-label">Ameaça</label>
+                  <input type="text" id="input-enemy-threat" class="form-input text-center font-bold" value="2" maxlength="2">
+                </div>
+                <div class="form-col">
+                  <label for="input-enemy-attack" class="control-label">Ataque</label>
+                  <input type="text" id="input-enemy-attack" class="form-input text-center font-bold" value="3" maxlength="2">
+                </div>
+                <div class="form-col">
+                  <label for="input-enemy-defense" class="control-label">Defesa</label>
+                  <input type="text" id="input-enemy-defense" class="form-input text-center font-bold" value="2" maxlength="2">
+                </div>
+                <div class="form-col">
+                  <label for="input-enemy-health" class="control-label">Vida</label>
+                  <input type="text" id="input-enemy-health" class="form-input text-center font-bold" value="4" maxlength="2">
+                </div>
+              </div>
+            </div>
+
+            <!-- Encounter Card Controls (Location, Treachery, Enemy, Objective, Treasure) -->
+            <div id="encounter-controls" class="section-box hidden">
+              <div class="form-row" id="location-stats-row">
+                <div class="form-col">
+                  <label for="input-threat" class="control-label">Ameaça (Threat)</label>
+                  <input type="text" id="input-threat" class="form-input text-center font-bold" value="2" maxlength="3">
+                </div>
+                <div class="form-col">
+                  <label for="input-quest-points" class="control-label">Progresso (Quest)</label>
+                  <input type="text" id="input-quest-points" class="form-input text-center font-bold" value="2" maxlength="3">
+                </div>
+                <div class="form-col">
+                  <label for="input-victory" class="control-label">Vitória (Victory)</label>
+                  <input type="text" id="input-victory" class="form-input text-center" placeholder="Ex: Victory 3.">
+                </div>
+              </div>
+
+              <div class="control-group mt-3 hidden" id="scenario-name-container">
+                <label for="input-scenario-name" class="control-label">Nome do Cenário (Scenario Name)</label>
+                <input type="text" id="input-scenario-name" class="form-input" placeholder="Ex: The Hunt for Gollum">
+              </div>
+
+              <div class="control-group mt-3">
+                <label for="select-encounter-set" class="control-label">Conjunto de Encontro (37 Ícones Disponíveis)</label>
+                <select id="select-encounter-set" class="form-select"></select>
+              </div>
+
+              <div class="form-row mt-3">
+                <div class="form-col">
+                  <label for="input-card-number" class="control-label">Número no Conjunto</label>
+                  <input type="text" id="input-card-number" class="form-input text-center" value="1/15">
+                </div>
+                <div class="form-col" id="shadow-toggle-container">
+                  <label class="control-label">Efeito de Sombra (Shadow)</label>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="input-has-shadow" checked>
+                    <span class="slider"></span>
+                    <span class="toggle-text">Incluir Sombra</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quest Card Controls -->
+            <div id="quest-controls" class="section-box hidden">
+              <div class="quest-side-toggle-group mb-3">
+                <label class="control-label">Lado da Missão (Quest Side)</label>
+                <div class="side-btn-group">
+                  <button type="button" class="quest-side-btn active" data-side="a">Frente</button>
+                  <button type="button" class="quest-side-btn" data-side="b">Verso</button>
+                </div>
+                <select id="input-quest-side" class="hidden">
+                  <option value="a" selected>Lado A</option>
+                  <option value="b">Lado B</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <div class="form-col" style="flex: 0 0 85px;">
+                  <label for="input-quest-stage" class="control-label">Estágio</label>
+                  <input type="text" id="input-quest-stage" class="form-input text-center font-bold" value="1" maxlength="2">
+                </div>
+                <div class="form-col" style="flex: 0 0 85px;">
+                  <label for="input-quest-letter" class="control-label">Letra</label>
+                  <select id="input-quest-letter" class="form-input" aria-label="Letra do estágio"></select>
+                </div>
+                <div class="form-col">
+                  <label for="input-stage-title" class="control-label">Título do Estágio</label>
+                  <input type="text" id="input-stage-title" class="form-input" placeholder="Ex: Flies and Spiders">
+                </div>
+              </div>
+              <div class="control-group mt-3">
+                <label for="input-quest-scenario-name" class="control-label">Nome do Cenário (Scenario)</label>
+                <input type="text" id="input-quest-scenario-name" class="form-input" placeholder="Ex: Passage Through Mirkwood">
+              </div>
+              <div class="form-row mt-3" id="quest-b-stats-row">
+                <div class="form-col">
+                  <label for="input-quest-points-side-b" class="control-label">Progresso (Quest Points)</label>
+                  <input type="text" id="input-quest-points-side-b" class="form-input text-center font-bold" value="8" maxlength="3" placeholder="Ex: 8 ou -">
+                </div>
+                <div class="form-col">
+                  <label for="input-quest-victory" class="control-label">Vitória (Victory)</label>
+                  <input type="text" id="input-quest-victory" class="form-input text-center" placeholder="Ex: Victory 1.">
+                </div>
+              </div>
+            </div>
+
+            <!-- Position Fine-Tuning / Offsets Controls -->
+            <div class="section-box mt-4" id="offsets-controls">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <label class="control-label" style="margin-bottom: 0;">🎯 Ajuste de Posição dos Atributos (Offsets)</label>
+                <button type="button" class="btn btn-secondary" id="btn-reset-offsets" style="padding: 2px 8px; font-size: 11px;">Resetar</button>
+              </div>
+              <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">
+                Ajuste fino em pixels para mover os números (X: esquerda/direita, Y: cima/baixo).
+              </p>
+
+              <div class="offsets-grid">
+                <!-- Health Offset -->
+                <div class="offset-card" id="offset-col-health">
+                  <div class="offset-card-header">
+                    <span class="offset-label">❤️ Vida (Health)</span>
+                  </div>
+                  <div class="offset-inputs-row">
+                    <div class="offset-input-wrap">
+                      <span class="offset-axis">X</span>
+                      <input type="number" id="offset-health-x" class="form-input text-center offset-input" value="0" min="-100" max="100" step="1">
+                    </div>
+                    <div class="offset-input-wrap">
+                      <span class="offset-axis">Y</span>
+                      <input type="number" id="offset-health-y" class="form-input text-center offset-input" value="0" min="-100" max="100" step="1">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Threat Cost / Cost Offset -->
+                <div class="offset-card" id="offset-col-cost">
+                  <div class="offset-card-header">
+                    <span class="offset-label">⚡ Custo / Ameaça</span>
+                  </div>
+                  <div class="offset-inputs-row">
+                    <div class="offset-input-wrap">
+                      <span class="offset-axis">X</span>
+                      <input type="number" id="offset-cost-x" class="form-input text-center offset-input" value="0" min="-100" max="100" step="1">
+                    </div>
+                    <div class="offset-input-wrap">
+                      <span class="offset-axis">Y</span>
+                      <input type="number" id="offset-cost-y" class="form-input text-center offset-input" value="0" min="-100" max="100" step="1">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Willpower Offset -->
+                <div class="offset-card" id="offset-col-willpower">
+                  <div class="offset-card-header">
+                    <span class="offset-label">🌟 Vontade (Willpower)</span>
+                  </div>
+                  <div class="offset-inputs-row">
+                    <div class="offset-input-wrap">
+                      <span class="offset-axis">X</span>
+                      <input type="number" id="offset-willpower-x" class="form-input text-center offset-input" value="0" min="-100" max="100" step="1">
+                    </div>
+                    <div class="offset-input-wrap">
+                      <span class="offset-axis">Y</span>
+                      <input type="number" id="offset-willpower-y" class="form-input text-center offset-input" value="0" min="-100" max="100" step="1">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Attack Offset -->
+                <div class="offset-card" id="offset-col-attack">
+                  <div class="offset-card-header">
+                    <span class="offset-label">⚔️ Ataque (Attack)</span>
+                  </div>
+                  <div class="offset-inputs-row">
+                    <div class="offset-input-wrap">
+                      <span class="offset-axis">X</span>
+                      <input type="number" id="offset-attack-x" class="form-input text-center offset-input" value="0" min="-100" max="100" step="1">
+                    </div>
+                    <div class="offset-input-wrap">
+                      <span class="offset-axis">Y</span>
+                      <input type="number" id="offset-attack-y" class="form-input text-center offset-input" value="0" min="-100" max="100" step="1">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Defense Offset -->
+                <div class="offset-card" id="offset-col-defense">
+                  <div class="offset-card-header">
+                    <span class="offset-label">🛡️ Defesa (Defense)</span>
+                  </div>
+                  <div class="offset-inputs-row">
+                    <div class="offset-input-wrap">
+                      <span class="offset-axis">X</span>
+                      <input type="number" id="offset-defense-x" class="form-input text-center offset-input" value="0" min="-100" max="100" step="1">
+                    </div>
+                    <div class="offset-input-wrap">
+                      <span class="offset-axis">Y</span>
+                      <input type="number" id="offset-defense-y" class="form-input text-center offset-input" value="0" min="-100" max="100" step="1">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Quest Points / Progress Offset -->
+                <div class="offset-card" id="offset-col-quest-points">
+                  <div class="offset-card-header">
+                    <span class="offset-label">📜 Progresso / Missão</span>
+                  </div>
+                  <div class="offset-inputs-row">
+                    <div class="offset-input-wrap">
+                      <span class="offset-axis">X</span>
+                      <input type="number" id="offset-quest-points-x" class="form-input text-center offset-input" value="0" min="-100" max="100" step="1">
+                    </div>
+                    <div class="offset-input-wrap">
+                      <span class="offset-axis">Y</span>
+                      <input type="number" id="offset-quest-points-y" class="form-input text-center offset-input" value="0" min="-100" max="100" step="1">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Type / Traits Offset -->
+                <div class="offset-card" id="offset-col-type">
+                  <div class="offset-card-header">
+                    <span class="offset-label">🏷️ Tipo / Subtipo (Traits)</span>
+                  </div>
+                  <div class="offset-inputs-row">
+                    <div class="offset-input-wrap">
+                      <span class="offset-axis">X</span>
+                      <input type="number" id="offset-type-x" class="form-input text-center offset-input" value="0" min="-100" max="100" step="1">
+                    </div>
+                    <div class="offset-input-wrap">
+                      <span class="offset-axis">Y</span>
+                      <input type="number" id="offset-type-y" class="form-input text-center offset-input" value="0" min="-100" max="100" step="1">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Hero Bottom Banner Offset -->
+                <div class="offset-card" id="offset-col-hero-type">
+                  <div class="offset-card-header">
+                    <span class="offset-label">👑 Banner Inferior (HERO)</span>
+                  </div>
+                  <div class="offset-inputs-row">
+                    <div class="offset-input-wrap">
+                      <span class="offset-axis">X</span>
+                      <input type="number" id="offset-hero-type-x" class="form-input text-center offset-input" value="0" min="-100" max="100" step="1">
+                    </div>
+                    <div class="offset-input-wrap">
+                      <span class="offset-axis">Y</span>
+                      <input type="number" id="offset-hero-type-y" class="form-input text-center offset-input" value="0" min="-100" max="100" step="1">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Name / Title Offset -->
+                <div class="offset-card" id="offset-col-name">
+                  <div class="offset-card-header">
+                    <span class="offset-label">📝 Nome / Título da Carta</span>
+                  </div>
+                  <div class="offset-inputs-row">
+                    <div class="offset-input-wrap">
+                      <span class="offset-axis">X</span>
+                      <input type="number" id="offset-name-x" class="form-input text-center offset-input" value="0" min="-100" max="100" step="1">
+                    </div>
+                    <div class="offset-input-wrap">
+                      <span class="offset-axis">Y</span>
+                      <input type="number" id="offset-name-y" class="form-input text-center offset-input" value="0" min="-100" max="100" step="1">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Flavor Text Offset -->
+                <div class="offset-card" style="display: none;">
+                  <div class="offset-card-header"><span class="offset-label">Missão: símbolo principal</span></div>
+                  <div class="offset-inputs-row">
+                    <div class="offset-input-wrap"><span class="offset-axis">X</span><input type="number" data-quest-icon-offset="questEncounterX" class="form-input text-center offset-input" value="0" step="1" aria-label="Posição horizontal do símbolo principal"></div>
+                    <div class="offset-input-wrap"><span class="offset-axis">Y</span><input type="number" data-quest-icon-offset="questEncounterY" class="form-input text-center offset-input" value="0" step="1" aria-label="Posição vertical do símbolo principal"></div>
+                  </div>
+                </div>
+                <div class="offset-card" style="display: none;">
+                  <div class="offset-card-header"><span class="offset-label">Missão: ícones menores</span></div>
+                  <div class="offset-inputs-row">
+                    <div class="offset-input-wrap"><span class="offset-axis">X</span><input type="number" data-quest-icon-offset="questAdditionalX" class="form-input text-center offset-input" value="0" step="1" aria-label="Posição horizontal dos ícones menores"></div>
+                    <div class="offset-input-wrap"><span class="offset-axis">Y</span><input type="number" data-quest-icon-offset="questAdditionalY" class="form-input text-center offset-input" value="0" step="1" aria-label="Posição vertical dos ícones menores"></div>
+                  </div>
+                </div>
+                <div class="offset-card" id="offset-col-flavor-text">
+                  <div class="offset-card-header">
+                    <span class="offset-label">💬 Flavor Text / Citação</span>
+                  </div>
+                  <div class="offset-inputs-row">
+                    <div class="offset-input-wrap">
+                      <span class="offset-axis">X</span>
+                      <input type="number" id="offset-flavor-text-x" class="form-input text-center offset-input" value="0" min="-100" max="100" step="1">
+                    </div>
+                    <div class="offset-input-wrap">
+                      <span class="offset-axis">Y</span>
+                      <input type="number" id="offset-flavor-text-y" class="form-input text-center offset-input" value="0" min="-100" max="100" step="1">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 2: Text & Rules -->
+          <div id="tab-text" class="tab-pane">
+            <!-- Quick Single Card Search from Hall of Beorn -->
+            <div class="quick-card-search-box mb-3">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <label class="control-label" style="margin-bottom: 0; font-size: 11px;">🔍 Buscar Carta no Hall of Beorn</label>
+                <span class="help-text" style="font-size: 10px;">Nome em inglês (ex: <em>Aragorn</em>, <em>Feint</em>) ou URL</span>
+              </div>
+              <div class="input-with-button">
+                <input type="text" id="input-quick-single-card" class="form-input" placeholder="Ex: Aragorn, Steward of Gondor, Feint..." style="font-size: 12px; height: 32px;">
+                <button type="button" id="btn-quick-import-single" class="btn btn-gold" style="padding: 4px 12px; font-size: 12px; height: 32px; white-space: nowrap;">
+                  <span>⚡</span> Buscar
+                </button>
+              </div>
+<label class="control-label">Cartas da expansão</label>
+<select class="form-input" data-import-scope aria-label="Cartas da expansão">
+  <option value="all">Todas: Player + Encounter + Quest Cards</option>
+  <option value="encounter-quest">Somente Encounter + Quest Cards</option>
+</select>
+<label class="help-text" style="display:block;margin-top:8px"><input type="checkbox" data-ai-import checked> Estender arte com IA local (experimental)</label>
+<small class="help-text">Cerca de 20–40 s por imagem nova. Resultados salvos são reutilizados.</small>
+            </div>
+
+            <div id="quick-ai-status" class="help-text" role="status" aria-live="polite"></div>
+            <div class="control-group">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <label for="input-name" class="control-label" style="margin-bottom: 0;">Título da Carta (Name)</label>
+                <button type="button" id="btn-translate-card" class="btn btn-secondary" style="padding: 3px 8px; font-size: 11px; color: var(--gold-light); border-color: var(--border-gold);" title="Traduzir título, regras e citações desta carta para Português usando IA">
+                  <span class="icon">🌐</span> Traduzir para PT-BR
+                </button>
+              </div>
+              <input type="text" id="input-name" class="form-input font-lotr" value="Steward of Gondor">
+            </div>
+
+            <div class="control-group">
+              <label for="input-traits" class="control-label">Subtipo / Traços (Traits)</label>
+              <input type="text" id="input-traits" class="form-input italic" value="Gondor. Title.">
+              <small class="help-text">Dica: Separe com pontos (ex: <em>Gondor. Title.</em> ou <em>Item. Weapon.</em>)</small>
+            </div>
+
+            <div class="control-group">
+              <div class="label-with-tools">
+                <label for="input-ability" class="control-label">Texto de Regras / Habilidade</label>
+                <div class="tag-toolbar">
+                  <button type="button" class="btn-tag" data-tag="[leadership]" title="Ícone de Liderança">👑 Liderança</button>
+                  <button type="button" class="btn-tag" data-tag="[tactics]" title="Ícone de Táticas">⚔️ Táticas</button>
+                  <button type="button" class="btn-tag" data-tag="[spirit]" title="Ícone de Espírito">🌟 Espírito</button>
+                  <button type="button" class="btn-tag" data-tag="[lore]" title="Ícone de Conhecimento">📜 Conhecimento</button>
+                  <button type="button" class="btn-tag" data-tag="[willpower]" title="Ícone de Força de Vontade">🕊️ Vontade</button>
+                  <button type="button" class="btn-tag" data-tag="[attack]" title="Ícone de Ataque">🗡️ Ataque</button>
+                  <button type="button" class="btn-tag" data-tag="[defense]" title="Ícone de Defesa">🛡️ Defesa</button>
+                  <button type="button" class="btn-tag" data-tag="[threat]" title="Ícone de Ameaça">👁️ Ameaça</button>
+                  <button type="button" class="btn-tag" data-tag="<b></b>" title="Negrito"><b>B</b></button>
+                  <button type="button" class="btn-tag" data-tag="<i></i>" title="Itálico"><i>I</i></button>
+                  <button type="button" class="btn-tag" data-tag="Action: " title="Ação">Action:</button>
+                  <button type="button" class="btn-tag" data-tag="Response: " title="Resposta">Response:</button>
+                </div>
+              </div>
+              <textarea id="input-ability" class="form-textarea" rows="4">Attach to a hero.
+Attached hero gains the [leadership] resource icon.
+<b>Action:</b> Exhaust Steward of Gondor to add 2 resources to attached hero's resource pool.</textarea>
+            </div>
+
+            <!-- Shadow Text Box (for Location / Treachery) -->
+            <div id="shadow-text-group" class="control-group hidden">
+              <label for="input-shadow" class="control-label">Texto do Efeito de Sombra (Shadow)</label>
+              <textarea id="input-shadow" class="form-textarea" rows="2">Shadow: Defending player exhausts a character he controls.</textarea>
+            </div>
+
+            <!-- Flavor Quote (for Attachment / Event) -->
+            <div id="quote-text-group" class="control-group">
+              <label for="input-quote" class="control-label">Citação / Flavor Text</label>
+              <textarea id="input-quote" class="form-textarea italic" rows="2">“...we will fight till the end.”</textarea>
+            </div>
+
+            <!-- Footer Details -->
+            <div class="form-row mt-3">
+              <div class="form-col">
+                <label for="input-illustrator" class="control-label">Ilustrador (Illus.)</label>
+                <input type="text" id="input-illustrator" class="form-input" value="Illus. Magali Villeneuve">
+              </div>
+              <div class="form-col">
+                <label for="input-copyright" class="control-label">Copyright</label>
+                <input type="text" id="input-copyright" class="form-input" value="©2011 Middle-earth Enterprises ©2011 FFG">
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 3: Art & Framing -->
+          <div id="tab-art" class="tab-pane">
+            <div id="art-source-controls" class="control-group hidden">
+              <label class="control-label" for="select-art-source">Arte da carta</label>
+              <select id="select-art-source" class="form-input">
+                <option value="original">Arte original da carta</option>
+                <option value="generated">Arte gerada por IA</option>
+                <option value="custom" disabled>Imagem personalizada / padrão</option>
+              </select>
+              <p id="art-source-help" class="help-text">Alterne sem gerar novamente. Cada versão mantém seus ajustes de enquadramento.</p>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Upload de Ilustração</label>
+              <div class="file-dropzone" id="art-dropzone">
+                <input type="file" id="input-art-file" accept="image/*" class="file-input">
+                <div class="dropzone-content">
+                  <span class="dropzone-icon">🖼️</span>
+                  <p class="dropzone-title">Clique ou arraste uma imagem aqui</p>
+                  <p class="dropzone-sub">PNG, JPG ou WebP de alta qualidade</p>
+                </div>
+              </div>
+              <button type="button" id="btn-use-sample-art" class="btn btn-secondary btn-sm mt-2 w-full">
+                🎨 Usar Ilustração Padrão do Modelo
+              </button>
+            </div>
+
+            <div class="section-box mt-3">
+              <label class="control-label">Ferramentas de Ilustração & Enquadramento</label>
+              <div id="proxy-framing-controls" class="section-box mb-3 hidden">
+                <label class="control-label" for="input-proxy-alignment">
+                  <input type="checkbox" id="input-proxy-alignment" checked> Alinhar à moldura automaticamente
+                </label>
+                <p class="help-text">Preserva a composição da imagem original, sem ampliar um recorte central. Você pode refinar com posição e escala abaixo.</p>
+                <button type="button" id="btn-restore-proxy-framing" class="btn btn-secondary btn-sm mt-2">Restaurar composição original</button>
+              </div>
+              
+              <div class="art-tool-tabs mb-3">
+                <button type="button" id="btn-mode-move" class="btn-art-tool active" title="Mover e posicionar a imagem">
+                  ✋ Mover Arte
+                </button>
+                <button type="button" id="btn-mode-eraser" class="btn-art-tool" title="Apagar partes indesejadas da arte com um pincel de borracha">
+                  🧹 Borracha de Arte
+                </button>
+              </div>
+
+              <!-- Eraser Toolbar (visible in eraser mode) -->
+              <div id="eraser-tool-box" class="eraser-box hidden">
+                <div class="slider-row">
+                  <label>Tamanho</label>
+                  <input type="range" id="slider-eraser-size" min="5" max="150" step="5" value="40">
+                  <span id="val-eraser-size" class="slider-val">40px</span>
+                </div>
+                <div class="button-row mt-2">
+                  <button type="button" id="btn-eraser-undo" class="btn btn-secondary btn-xs" title="Desfazer último traço">
+                    ↩️ Desfazer Traço
+                  </button>
+                  <button type="button" id="btn-eraser-clear" class="btn btn-secondary btn-xs" title="Limpar todas as borrachadas">
+                    🗑️ Limpar Todas
+                  </button>
+                </div>
+                <small class="help-text mt-1">Passe o mouse com o botão pressionado sobre o preview da carta para apagar detalhes ou textos da arte original.</small>
+              </div>
+
+              <!-- Controles de Escala / Dimensão (Largura e Altura Independentes) -->
+              <div class="scale-controls-box mt-2 mb-2">
+                <div class="scale-header-row mb-1">
+                  <span class="control-label text-xs">Dimensões da Imagem</span>
+                  <button type="button" id="btn-toggle-ratio-lock" class="btn-ratio-lock" title="Travar ou destravar proporção entre largura e altura">
+                    <span id="ratio-lock-icon">🔓</span> <span id="ratio-lock-text">Livre (Individual)</span>
+                  </button>
+                </div>
+
+                <!-- Largura (Scale X) -->
+                <div class="slider-row">
+                  <label for="input-scale-x-val">Largura (X)</label>
+                  <div class="zoom-stepper-container">
+                    <button type="button" id="btn-scale-x-minus" class="btn-step" title="Diminuir Largura (-5%)">➖</button>
+                    <input type="range" id="slider-scale-x" min="0.2" max="3.5" step="0.01" value="1.29">
+                    <button type="button" id="btn-scale-x-plus" class="btn-step" title="Aumentar Largura (+5%)">➕</button>
+                  </div>
+                  <div class="zoom-input-wrapper">
+                    <input type="number" id="input-scale-x-val" class="zoom-direct-input" min="20" max="350" step="1" value="129" title="Largura em %">
+                    <span class="unit-label">%</span>
+                  </div>
+                </div>
+
+                <!-- Altura (Scale Y) -->
+                <div class="slider-row mt-1">
+                  <label for="input-scale-y-val">Altura (Y)</label>
+                  <div class="zoom-stepper-container">
+                    <button type="button" id="btn-scale-y-minus" class="btn-step" title="Diminuir Altura (-5%)">➖</button>
+                    <input type="range" id="slider-scale-y" min="0.2" max="3.5" step="0.01" value="1.29">
+                    <button type="button" id="btn-scale-y-plus" class="btn-step" title="Aumentar Altura (+5%)">➕</button>
+                  </div>
+                  <div class="zoom-input-wrapper">
+                    <input type="number" id="input-scale-y-val" class="zoom-direct-input" min="20" max="350" step="1" value="129" title="Altura em %">
+                    <span class="unit-label">%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="quick-zoom-bar">
+                <button type="button" class="btn-zoom-preset" data-zoom="1.0">100%</button>
+                <button type="button" class="btn-zoom-preset" data-zoom="1.15">115%</button>
+                <button type="button" class="btn-zoom-preset" data-zoom="1.29">129%</button>
+                <button type="button" class="btn-zoom-preset" data-zoom="1.5">150%</button>
+                <button type="button" class="btn-zoom-preset" data-zoom="2.0">200%</button>
+                <button type="button" id="btn-equalize-scale" class="btn-zoom-preset" title="Igualar largura e altura para escala proporcional">🟰 1:1</button>
+              </div>
+
+              <!-- Presets Rápidos de Enquadramento -->
+              <div class="art-framing-presets mt-3 mb-2">
+                <label class="control-label text-xs">🎯 Enquadramento Rápido</label>
+                <div class="framing-btn-group">
+                  <button type="button" id="btn-frame-quest-top-right" class="btn btn-secondary btn-xs" title="Posiciona no terço superior direito (ideal para Quests com personagens)">
+                    🎯 Foco Superior Direito
+                  </button>
+                  <button type="button" id="btn-frame-quest-center" class="btn btn-secondary btn-xs" title="Centraliza no vão superior da Quest">
+                    🎯 Foco Topo Centro
+                  </button>
+                  <button type="button" id="btn-frame-fit" class="btn btn-secondary btn-xs" title="Enquadramento padrão centralizado">
+                    🔲 Centralizar
+                  </button>
+                </div>
+              </div>
+
+              <div class="slider-row">
+                <label>Posição X</label>
+                <input type="range" id="slider-pos-x" min="-800" max="800" step="1" value="-54">
+                <span id="val-pos-x" class="slider-val">-54px</span>
+              </div>
+
+              <div class="slider-row">
+                <label>Posição Y</label>
+                <input type="range" id="slider-pos-y" min="-800" max="800" step="1" value="247">
+                <span id="val-pos-y" class="slider-val">247px</span>
+              </div>
+
+              <div class="slider-row">
+                <label>Rotação</label>
+                <input type="range" id="slider-rotation" min="-180" max="180" step="1" value="0">
+                <span id="val-rotation" class="slider-val">0°</span>
+              </div>
+              <div class="control-group mt-2">
+                <label class="control-label">Girar a imagem</label>
+                <div class="side-btn-group">
+                  <button type="button" class="btn btn-secondary btn-sm" data-rotate-art="-90">↶ 90°</button>
+                  <button type="button" class="btn btn-secondary btn-sm" data-rotate-art="90">↷ 90°</button>
+                  <button type="button" class="btn btn-secondary btn-sm" data-rotate-art="180">Virar 180°</button>
+                </div>
+                <p class="help-text">Corrige imagens deitadas ou de ponta-cabeça. A moldura e os textos permanecem na posição original.</p>
+              </div>
+
+              <div class="slider-row">
+                <label>Esmaecer Base</label>
+                <input type="range" id="slider-bottom-fade" min="0" max="100" step="5" value="0">
+                <span id="val-bottom-fade" class="slider-val">0%</span>
+              </div>
+
+              <div class="slider-row">
+                <label>Suavizar Bordas</label>
+                <input type="range" id="slider-feather" min="0" max="80" step="2" value="0">
+                <span id="val-feather" class="slider-val">0px</span>
+              </div>
+
+              <div class="slider-row">
+                <label>Brilho</label>
+                <input type="range" id="slider-brightness" min="0.5" max="1.5" step="0.05" value="1.0">
+                <span id="val-brightness" class="slider-val">100%</span>
+              </div>
+
+              <div class="slider-row">
+                <label>Contraste</label>
+                <input type="range" id="slider-contrast" min="0.5" max="1.5" step="0.05" value="1.0">
+                <span id="val-contrast" class="slider-val">100%</span>
+              </div>
+
+              <div class="button-row mt-3">
+                <button type="button" id="btn-sync-art-sides" class="btn btn-secondary btn-sm" title="Sincroniza a imagem e enquadramento atual para o outro lado (A ↔ B) da carta">
+                  🔗 Sincronizar Lados (A ↔ B)
+                </button>
+                <button type="button" id="btn-reset-art" class="btn btn-secondary btn-sm" title="Voltar ao enquadramento padrão inicial">
+                  🔄 Resetar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 4: Presets & Saved Cards -->
+          <div id="tab-presets" class="tab-pane">
+            <div class="control-group">
+              <label class="control-label">Cartas de Exemplo / Pré-configuradas</label>
+              <div class="presets-list" id="presets-list">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <div class="section-box mt-3">
+              <label class="control-label">Importar / Exportar Biblioteca</label>
+              <div class="button-row">
+                <button type="button" id="btn-export-json" class="btn btn-secondary btn-sm">
+                  📤 Exportar JSON
+                </button>
+                <button type="button" id="btn-import-json-trigger" class="btn btn-secondary btn-sm">
+                  📥 Importar JSON
+                </button>
+                <input type="file" id="input-import-json" accept=".json" class="hidden">
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right Panel: Real-time Live Preview & Canvas Stage -->
+      <section class="panel-preview">
+        <div class="preview-toolbar">
+          <div class="zoom-controls">
+            <span class="toolbar-label">Preview:</span>
+            <button type="button" class="btn-zoom" data-scale="0.5">50%</button>
+            <button type="button" class="btn-zoom active" data-scale="0.68">Fit</button>
+            <button type="button" class="btn-zoom" data-scale="0.85">85%</button>
+            <button type="button" class="btn-zoom" data-scale="1.0">100%</button>
+            <button type="button" id="btn-flip-quest" class="btn btn-sm btn-gold hidden" style="margin-left: 8px;">🔄 Virar (Lado A / B)</button>
+          </div>
+          <div class="canvas-info">
+            <span class="badge" id="canvas-dim-badge">756 × 1063 px (300 DPI)</span>
+          </div>
+        </div>
+
+        <div class="card-viewport" id="card-viewport">
+          <div class="card-wrapper" id="card-wrapper">
+            <canvas id="card-canvas" width="756" height="1063"></canvas>
+            <div class="interactive-drag-overlay" id="drag-overlay" title="Clique e arraste para posicionar a ilustração"></div>
+            <div class="eraser-cursor-preview" id="eraser-cursor-preview"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Modal: Deck & Proxy Print Sheet -->
+    <div id="modal-deck" class="modal-backdrop hidden">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <h2 class="modal-title">📦 Folha de Impressão de Proxies & Deck</h2>
+          <button type="button" class="btn-close" id="btn-close-deck">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="deck-settings-bar">
+            <div class="deck-stat">
+              Total de Cartas na Folha: <strong id="modal-total-cards">0</strong>
+            </div>
+            <div class="deck-stat">
+              Páginas A4 (9 cartas/página): <strong id="modal-total-pages">0</strong>
+            </div>
+            <div class="deck-options">
+              <label class="checkbox-label">
+                <input type="checkbox" id="chk-cut-marks" checked>
+                Marcas de Corte (Guias)
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" id="chk-high-quality" checked>
+                Qualidade Máxima (300 DPI)
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" id="chk-zip-duplicates" checked>
+                Incluir Cópias no ZIP
+              </label>
+            </div>
+          </div>
+
+          <div class="deck-grid" id="deck-grid">
+            <!-- Deck cards list -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="btn-clear-deck" class="btn btn-secondary">
+            🗑️ Limpar Deck
+          </button>
+          <button type="button" id="btn-export-deck-images" class="btn btn-primary" title="Exportar todas as cartas do deck em alta resolução (300 DPI PNG) em um arquivo ZIP">
+            <span class="icon">🖼️</span> Exportar Imagens (.ZIP)
+          </button>
+          <button type="button" id="btn-generate-pdf" class="btn btn-gold">
+            📄 Gerar PDF de Impressão (A4 Proxies)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Hall of Beorn Importer -->
+    <div id="modal-importer" class="modal-backdrop hidden">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-header">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 24px;">🐻</span>
+            <div>
+              <h2 class="modal-title">Importador de Cartas & Expansões - Hall of Beorn</h2>
+              <span class="help-text">Busque uma carta única (ex: Aragorn, Feint) ou cole o link de uma expansão inteira</span>
+            </div>
+          </div>
+          <button type="button" class="btn-close" id="btn-close-importer">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="control-group">
+            <label class="control-label" for="input-hob-url">Nome da Carta ou URL no Hall of Beorn</label>
+            <div class="input-with-button">
+              <input type="text" id="input-hob-url" class="form-input" placeholder="Digite o nome da carta (ex: Steward of Gondor, Feint) ou cole a URL do Hall of Beorn..." value="https://hallofbeorn.com/LotR/Products/The-Hunt-for-Gollum?View=Browse">
+              <button type="button" id="btn-start-import" class="btn btn-gold">
+                <span>⚡</span> Buscar / Importar
+              </button>
+            </div>
+<label class="control-label">Cartas da expansão</label>
+<select class="form-input" data-import-scope aria-label="Cartas da expansão">
+  <option value="all">Todas: Player + Encounter + Quest Cards</option>
+  <option value="encounter-quest">Somente Encounter + Quest Cards</option>
+</select>
+<label class="help-text" style="display:block;margin-top:8px"><input type="checkbox" data-ai-import checked> Estender arte com IA local (experimental)</label>
+<small class="help-text">Cerca de 20–40 s por imagem nova. Resultados salvos são reutilizados.</small>
+          </div>
+
+          <div class="quick-expansions-bar">
+            <span class="help-text" style="font-weight: 600;">Atalhos rápidos:</span>
+            <button type="button" class="btn-quick-exp" data-url="Aragorn">👑 Aragorn</button>
+            <button type="button" class="btn-quick-exp" data-url="Gandalf">🧙 Gandalf</button>
+            <button type="button" class="btn-quick-exp" data-url="Steward of Gondor">📜 Steward of Gondor</button>
+            <button type="button" class="btn-quick-exp" data-url="Feint">⚔️ Feint</button>
+            <button type="button" class="btn-quick-exp" data-url="A Test of Will">🌟 A Test of Will</button>
+            <button type="button" class="btn-quick-exp" data-url="https://hallofbeorn.com/LotR/Products/The-Hunt-for-Gollum?View=Browse">📦 The Hunt for Gollum</button>
+            <button type="button" class="btn-quick-exp" data-url="https://hallofbeorn.com/LotR/Products/Conflict-at-the-Carrock?View=Browse">📦 Conflict at Carrock</button>
+          </div>
+
+          <!-- Status and Progress Bar -->
+          <div id="importer-status-box" class="importer-status-box hidden">
+            <div class="status-header">
+              <span id="importer-status-text">⏳ Carregando dados da expansão...</span>
+              <span id="importer-count-badge" class="badge">0 cartas</span>
+            </div>
+            <div class="progress-track">
+              <div id="importer-progress-bar" class="progress-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <!-- Imported Cards Section -->
+          <div class="imported-cards-header hidden" id="imported-results-header">
+            <span class="control-label" id="imported-expansion-title">Cartas Extraídas:</span>
+            <div class="imported-actions-bar">
+              <button type="button" id="btn-select-all-imported" class="btn btn-secondary btn-sm">Selecionar Todas</button>
+              <button type="button" id="btn-translate-imported" class="btn btn-secondary btn-sm" style="color: var(--gold-light); border-color: var(--border-gold);" title="Traduzir todas as cartas selecionadas para PT-BR usando IA">
+                <span class="icon">🌐</span> Traduzir Selecionadas (PT-BR)
+              </button>
+              <button type="button" id="btn-export-imported-zip" class="btn btn-secondary btn-sm" title="Exportar cartas selecionadas como imagens PNG de alta resolução em um arquivo ZIP">
+                <span class="icon">🖼️</span> Exportar Imagens (.ZIP)
+              </button>
+              <button type="button" id="btn-add-imported-to-deck" class="btn btn-primary btn-sm">➕ Adicionar ao Deck</button>
+              <button type="button" id="btn-save-imported-to-lib" class="btn btn-gold btn-sm">💾 Salvar na Biblioteca</button>
+            </div>
+          </div>
+
+          <div class="imported-cards-grid" id="imported-cards-grid">
+            <!-- Dynamically populated cards -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Translation Settings (Google Gemini / OpenAI) -->
+    <div id="modal-translation-settings" class="modal-backdrop hidden">
+      <div class="modal-dialog" style="max-width: 520px;">
+        <div class="modal-header">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 24px;">🤖</span>
+            <div>
+              <h2 class="modal-title">Configurações de Tradução com IA</h2>
+              <span class="help-text">Tradução automática de cartas com o glossário oficial de LotR LCG (PT-BR)</span>
+            </div>
+          </div>
+          <button type="button" class="btn-close" id="btn-close-translation-settings">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="control-group">
+            <label class="control-label">Provedor de Inteligência Artificial</label>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <label class="radio-card" style="background: var(--bg-tertiary); border: 1px solid var(--border-subtle); padding: 10px; border-radius: var(--radius-sm); cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                <input type="radio" name="ai-provider" value="google" id="provider-google" checked>
+                <div>
+                  <strong style="display: block; font-size: 13px; color: var(--gold-primary);">Google Gemini</strong>
+                  <span class="help-text" style="font-size: 11px;">Rápido e gratuito</span>
+                </div>
+              </label>
+              <label class="radio-card" style="background: var(--bg-tertiary); border: 1px solid var(--border-subtle); padding: 10px; border-radius: var(--radius-sm); cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                <input type="radio" name="ai-provider" value="openai" id="provider-openai">
+                <div>
+                  <strong style="display: block; font-size: 13px; color: var(--gold-primary);">OpenAI (ChatGPT)</strong>
+                  <span class="help-text" style="font-size: 11px;">GPT-4o / GPT-4o-mini</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="control-group mt-3">
+            <label class="control-label" for="input-api-key">Chave de API (API Key)</label>
+            <input type="password" id="input-api-key" class="form-input" placeholder="Cole sua chave aqui (AIzaSy... ou sk-...)">
+            <small class="help-text" id="api-key-help" style="margin-top: 4px; display: block;">
+              Para Google Gemini: Obtenha grátis em <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: var(--gold-primary); text-decoration: underline;">Google AI Studio</a>.
+            </small>
+          </div>
+
+          <div class="control-group mt-3">
+            <label class="control-label" for="select-ai-model">Modelo de Linguagem</label>
+            <select id="select-ai-model" class="form-select">
+              <option value="gemini-3.6-flash">Gemini 3.6 Flash (Recomendado - Mais Recente)</option>
+              <option value="gemini-3.5-flash">Gemini 3.5 Flash</option>
+              <option value="gemini-3.7-flash">Gemini 3.7 Flash</option>
+              <option value="gemini-3.5-flash-lite">Gemini 3.5 Flash Lite</option>
+              <option value="gemini-flash-latest">Gemini Flash Latest</option>
+            </select>
+          </div>
+
+          <div id="translation-status-msg" class="mt-3 hidden" style="font-size: 12px; padding: 8px 12px; border-radius: 6px; background: rgba(22, 163, 74, 0.15); border: 1px solid #16a34a; color: #86efac;"></div>
+        </div>
+        <div class="modal-footer" style="display: flex; justify-content: space-between;">
+          <button type="button" id="btn-test-translation" class="btn btn-secondary">
+            🧪 Testar Conexão
+          </button>
+          <button type="button" id="btn-save-translation-settings" class="btn btn-gold">
+            💾 Salvar Configurações
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

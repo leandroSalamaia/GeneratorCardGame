@@ -1,0 +1,403 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Hall of Beorn</title>
+  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/Images/HallOfBeorn-AppleTouchIcon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <script src="/Scripts/jquery-1.8.2.min.js" defer></script>
+  <script src="/Scripts/jquery-ui-1.8.24.min.js" defer></script>
+
+  <link rel="stylesheet" type="text/css" href="/Content/themes/base/minified/jquery-ui.min.css?v=yo606IqQVvAsVDm3rc0aq92-IGlro_iUGU5yxgvB34E" />
+  <link rel="stylesheet" type="text/css" href="/Content/Site-1.0.5.min.css?v=IQWEiKnExLCWWxuKz-PuTrEoS668B0Zwb8NWQL0Tz2I" />
+<script type="text/javascript">!function(T,l,y){var S=T.location,k="script",D="instrumentationKey",C="ingestionendpoint",I="disableExceptionTracking",E="ai.device.",b="toLowerCase",w="crossOrigin",N="POST",e="appInsightsSDK",t=y.name||"appInsights";(y.name||T[e])&&(T[e]=t);var n=T[t]||function(d){var g=!1,f=!1,m={initialize:!0,queue:[],sv:"5",version:2,config:d};function v(e,t){var n={},a="Browser";return n[E+"id"]=a[b](),n[E+"type"]=a,n["ai.operation.name"]=S&&S.pathname||"_unknown_",n["ai.internal.sdkVersion"]="javascript:snippet_"+(m.sv||m.version),{time:function(){var e=new Date;function t(e){var t=""+e;return 1===t.length&&(t="0"+t),t}return e.getUTCFullYear()+"-"+t(1+e.getUTCMonth())+"-"+t(e.getUTCDate())+"T"+t(e.getUTCHours())+":"+t(e.getUTCMinutes())+":"+t(e.getUTCSeconds())+"."+((e.getUTCMilliseconds()/1e3).toFixed(3)+"").slice(2,5)+"Z"}(),iKey:e,name:"Microsoft.ApplicationInsights."+e.replace(/-/g,"")+"."+t,sampleRate:100,tags:n,data:{baseData:{ver:2}}}}var h=d.url||y.src;if(h){function a(e){var t,n,a,i,r,o,s,c,u,p,l;g=!0,m.queue=[],f||(f=!0,t=h,s=function(){var e={},t=d.connectionString;if(t)for(var n=t.split(";"),a=0;a<n.length;a++){var i=n[a].split("=");2===i.length&&(e[i[0][b]()]=i[1])}if(!e[C]){var r=e.endpointsuffix,o=r?e.location:null;e[C]="https://"+(o?o+".":"")+"dc."+(r||"services.visualstudio.com")}return e}(),c=s[D]||d[D]||"",u=s[C],p=u?u+"/v2/track":d.endpointUrl,(l=[]).push((n="SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details)",a=t,i=p,(o=(r=v(c,"Exception")).data).baseType="ExceptionData",o.baseData.exceptions=[{typeName:"SDKLoadFailed",message:n.replace(/\./g,"-"),hasFullStack:!1,stack:n+"\nSnippet failed to load ["+a+"] -- Telemetry is disabled\nHelp Link: https://go.microsoft.com/fwlink/?linkid=2128109\nHost: "+(S&&S.pathname||"_unknown_")+"\nEndpoint: "+i,parsedStack:[]}],r)),l.push(function(e,t,n,a){var i=v(c,"Message"),r=i.data;r.baseType="MessageData";var o=r.baseData;return o.message='AI (Internal): 99 message:"'+("SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details) ("+n+")").replace(/\"/g,"")+'"',o.properties={endpoint:a},i}(0,0,t,p)),function(e,t){if(JSON){var n=T.fetch;if(n&&!y.useXhr)n(t,{method:N,body:JSON.stringify(e),mode:"cors"});else if(XMLHttpRequest){var a=new XMLHttpRequest;a.open(N,t),a.setRequestHeader("Content-type","application/json"),a.send(JSON.stringify(e))}}}(l,p))}function i(e,t){f||setTimeout(function(){!t&&m.core||a()},500)}var e=function(){var n=l.createElement(k);n.src=h;var e=y[w];return!e&&""!==e||"undefined"==n[w]||(n[w]=e),n.onload=i,n.onerror=a,n.onreadystatechange=function(e,t){"loaded"!==n.readyState&&"complete"!==n.readyState||i(0,t)},n}();y.ld<0?l.getElementsByTagName("head")[0].appendChild(e):setTimeout(function(){l.getElementsByTagName(k)[0].parentNode.appendChild(e)},y.ld||0)}try{m.cookie=l.cookie}catch(p){}function t(e){for(;e.length;)!function(t){m[t]=function(){var e=arguments;g||m.queue.push(function(){m[t].apply(m,e)})}}(e.pop())}var n="track",r="TrackPage",o="TrackEvent";t([n+"Event",n+"PageView",n+"Exception",n+"Trace",n+"DependencyData",n+"Metric",n+"PageViewPerformance","start"+r,"stop"+r,"start"+o,"stop"+o,"addTelemetryInitializer","setAuthenticatedUserContext","clearAuthenticatedUserContext","flush"]),m.SeverityLevel={Verbose:0,Information:1,Warning:2,Error:3,Critical:4};var s=(d.extensionConfig||{}).ApplicationInsightsAnalytics||{};if(!0!==d[I]&&!0!==s[I]){var c="onerror";t(["_"+c]);var u=T[c];T[c]=function(e,t,n,a,i){var r=u&&u(e,t,n,a,i);return!0!==r&&m["_"+c]({message:e,url:t,lineNumber:n,columnNumber:a,error:i}),r},d.autoExceptionInstrumented=!0}return m}(y.cfg);function a(){y.onInit&&y.onInit(n)}(T[t]=n).queue&&0===n.queue.length?(n.queue.push(a),n.trackPageView({})):a()}(window,document,{
+src: "https://js.monitor.azure.com/scripts/b/ai.2.min.js", // The SDK URL Source
+crossOrigin: "anonymous", 
+cfg: { // Application Insights Configuration
+    connectionString: 'InstrumentationKey=7a563adf-63d6-4b6f-be8c-e7146154d1a9;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/'
+}});</script></head>
+<body>
+  <header>
+    <div class="content-wrapper">
+      <div style="display:inline-block;text-align:center;">
+        <div style="display:inline-block">
+          <a href="/LotR" style="text-align:center;display:inline-block;"><img src="/Images/LotRBeornSmall.jpg" width="64" height="48" title="Lord of the Rings LCG" loading="lazy" /></a>
+          <span class="site-title" style="color: brown; font-family:Tolkien;min-width:180px;display:inline-block;margin:6px 0px -10px 0px;font-size:27px; vertical-align:top;">HALL of BEORN</span>
+          <a href="https://dragncards.com/lobby" target="_blank" style="text-align:center;display:inline-block;"><img src="https://hallofbeorn-resources.s3.amazonaws.com/Images/LotR/Promos/DragnCards-Promo.png" width="64" height="48" title="Play LotR LCG Online" loading="lazy" /></a>
+        </div>
+        <div style="min-width:200px;margin:-12px 0px 16px 0px;text-align:center">LotR LCG Card Search</div>
+      </div>
+      <div>
+
+        <nav>
+            <ul id="menu">
+              <li><a title="Search Cards" href="/LotR">Search</a></li>
+              <li><a title="Browse Products" href="/LotR/Products">Products</a></li>
+              <li><a title="Browse Scenarios" href="/LotR/Scenarios/">Scenarios</a></li>
+              <li><a title="Browse Characters" href="/LotR/Characters/">Characters</a></li>
+              <li><a title="Browse Creators" href="/LotR/Creators" target="_blank">Creators</a></li>
+              <li><a title="Settings" href="/LotR/Settings">🐻</a></li>
+              <li><a title="Patreon Page" href="https://www.patreon.com/Beorn" target="_blank"><img title="Patreon Donors" alt="Patreon Donors" src="/Images/Patreon.png" loading="lazy" /></a></li>
+            </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <div id="body" class="bg-body">
+    
+    <section class="content-wrapper main-content clear-fix">
+      
+
+<style>
+  .shadow-divider {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+  }
+  .cave-span,
+  .victory-span {
+    padding-left:4px;
+    padding-right:4px;
+    border-style:solid;
+    border-width:1px;
+    border-color:black;
+  }
+  .xp-span {
+    padding-left:4px;
+    padding-right:4px;
+  }
+  .icon-16-2-2-2 {
+    height:16px;
+    margin-left:2px;
+    margin-right:2px;
+    margin-bottom:-2px;
+  }
+  .icon-4-2-4-16-16 {
+    margin-bottom:-4px;
+    margin-left:-2px;
+    margin-right:-4px;
+    height:16px;
+    width:16px;
+  }
+  .icon-16-0-2-1 {
+    height:16px;
+    margin-left:0px;
+    margin-right:2px;
+    margin-bottom:-1px;
+  }
+  .icon-15-15-2 {
+    height:15px;
+    width:15px;
+    margin-bottom:-2px;
+  }
+  .no-decoration {
+    text-decoration:none;
+  }
+  .statTextBox ul {
+    margin-top: -12px;
+  }
+
+  .icon-Fellowship {
+    margin-top: -3px;
+    margin-left: -1px;
+    margin-right: 0px;
+    height: 13px;
+    width: 13px;
+  }
+
+  .icon-Leadership {
+    height: 16px;
+    width: 16px;
+    margin-top: -3px;
+    margin-left: -3px;
+    margin-right: -3px;
+  }
+  
+  .icon-Lore {
+		height: 16px;
+		width: 16px;
+    margin-top: -3px;
+    margin-left: -4px;
+    margin-right: -4px;
+  }
+
+	.icon-Spirit {
+		height: 16px;
+		width: 16px;
+		margin-top: -3px;
+    margin-left: -2px;
+    margin-right: -3px;
+  }
+
+	.icon-Tactics {
+		height: 16px;
+		width: 16px;
+		margin-top: -3px;
+    margin-left: -3px;
+    margin-right: -2px;
+  }
+
+	.icon-Baggins {
+		height: 16px;
+		width: 16px;
+    margin-top: -2px;
+    margin-left: -2px;
+    margin-right: 0px;
+  }
+
+  .icon-Willpower {
+    height: 16px;
+    width: 16px;
+    margin-top: -2px;
+    margin-left: -1px;
+  }
+
+  .icon-Threat {
+    height: 16px;
+    width: 16px;
+    margin-top: -3px;
+    margin-left: -1px;
+  }
+
+  .icon-Attack {
+    height: 16px;
+    width: 16px;
+    margin-top: -2px;
+    margin-left: -1px;
+  }
+
+  .icon-Defense {
+    height: 16px;
+    width: 16px;
+    margin-top: -2px;
+    margin-left: -1px;
+  }
+
+  .icon-Per-Player {
+    height: 16px;
+    width: 16px;
+    margin-top: -6px;
+    margin-left: 1px;
+  }
+
+  .icon-Popularity {
+    height: 16px;
+    width: 16px;
+    margin-top: -3px;
+  }
+
+  .main-text {
+    margin-bottom: 0.5rem;
+  }
+
+  .main-text a {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .main-text .eye {
+    margin-bottom: 2px;
+    height: 13px;
+    width: 13px;
+  }
+
+  .flavor-text {
+    width: unset;
+  }
+</style>
+
+<div class="titleBox" style="display:inline-block;max-width:310px;margin-right:10px;">
+    <div class="titleNameBox">
+            <div style="font-size:1.75em;font-family:Verdana;"><img src="/Images/unique-card.png" style="margin-right:3px;margin-bottom:-5px;height:28px;width:28px;" loading="lazy" />Gandalf</div>
+        <div style="margin-top:4px;margin-bottom:2px;">
+            <span style="display:inline-block;max-width:154px;">
+                <a href="/LotR?CardSet=Core&#x2B;Set&amp;Lang=FR&amp;Sort=Set_Number#search-result-Gandalf-Core" title="Search for Core Set (FR)">Core Set</a>
+            </span>
+            <span style="margin-left:8px;display:inline-block;">#73 (x4)</span>
+        </div>
+    </div>
+
+<div class="w-100 bg-secondary border border-danger border-1" style="aspect-ratio: 63/88; border-radius: 0.75vmin !important;"><picture><img      data-src="https://s3.amazonaws.com/hallofbeorn-resources/Images/LotR/Cards/FR/Core-Set/Gandalf.png"      data-stripped-src="https://s3.amazonaws.com/hallofbeorn-resources/Images/LotR/Cards/FR/Core-Set/Gandalf.png"      class="card-image w-100" loading="lazy"      style="border-radius: 0.75vmin !important;"      onload="CardImageLoad_Handler(this)"      onerror="CardImageError_Handler(this)" /></picture></div></div>
+<div class="statBox" style="display:inline-block;max-width:328px;vertical-align:top;">
+    <div style="display:inline-block;">
+        <div class="statHeaderBox">
+            <div class="statTypeBox">
+                <div style="display:inline-block;">
+                    <div style="font-weight:bold;font-size:20pt;">Alli&#xE9;</div>
+                </div>
+                
+                
+            </div>
+            <div class="statValueBox" style="margin-top:2px;margin-bottom:8px;">
+
+                <div style="display:inline-block;">
+                            <span style="margin-left:2px;width:40px;color:#616161;">[</span><span style="margin-left:4px;margin-right:4px;font-weight:bold;">5</span><span style="color:#616161;">]</span>
+                            <span style="width:24px;margin-left:20px;"><span style="margin-right:2px;font-weight:bold;">4</span><img title="Willpower" style="margin-bottom:-3px;height:20px" src="/Images/willpower-med.png" loading="lazy" /></span>
+                            <span style="width:24px;margin-left:20px;"><span style="margin-right:2px;font-weight:bold;">4</span><img title="Attack" style="margin-bottom:-3px;height:20px" src="/Images/attack-med.png" loading="lazy" /></span>
+                            <span style="width:24px;margin-left:20px;"><span style="margin-right:2px;font-weight:bold;">4</span><img title="Defense" style="margin-bottom:-3px;height:20px" src="/Images/defense-med.png" loading="lazy" /></span>
+                            <span style="width:24px;margin-left:20px;"><span style="margin-right:2px;font-weight:bold;">4</span><img title="Hit Points" style="margin-bottom:-4px;height:20px;" src="/Images/heart-med.png" loading="lazy" /></span>
+                </div>
+            </div>
+            
+            <div class="statTextBox pb-4 pt-1" style="margin:2px;padding-top:0px;padding-left:6px;padding-right:6px;border: 1px solid gray;border-radius:4px;position:relative;background-color:#e4e4e4;">
+            
+
+                <div style="text-align:center;">
+                    <a title="Trait Search" href='/LotR?Trait=Istari.'><b><i>Istari.</i></b></a>  &nbsp;
+                </div>
+       
+<p class='main-text'>At the end of the round, discard Gandalf from play.</p><p class='main-text'><b>Response:</b> After Gandalf enters play, <span class='small-text'>(choose 1)</span>:</p><ul><li>draw 3 cards</li><li>deal 4 damage to 1 enemy in play</li><li>reduce your threat by 5.</li></ul>            </div>
+
+            
+        </div>
+       </div>
+</div>
+<div class="extraBox">
+    <div>
+            <div />
+            <span style="margin-left:5px;margin-right:-3px;">Illus.</span>
+                <a style="margin-left:5px;margin-right:10px;" href="http://lucasgraciano.deviantart.com" target="_blank">Lucas Graciano</a>
+            <div style="font-weight:bold;margin: 16px 0px 4px 6px;">Community Alternate Art</div>
+                <span style="display:inline-block;margin: 4px;" title="Gandalf Core Set Completion">
+                    <img title="Gandalf Core Set Completion" src="https://hallofbeorn-resources.s3.amazonaws.com/Images/LotR/Community/Gandalf-Core-Set-Completion.jpg" style="width:200px" loading="lazy" />
+                </span>
+            <div style="font-weight:bold;margin-left:4px;margin-top:10px;margin-bottom:4px;">
+                <a href="/LotR/Characters/Gandalf" target="_blank" title="Gandalf Character Profile">Character Profile</a>
+            </div>
+            <div style="font-weight:bold;margin-left:6px;margin-top:10px;margin-bottom:4px;">Categories</div>
+                <span style="display:inline-block;margin-top:4px;margin-bottom:4px;margin-left:8px;border-radius:6px;border-width:2px;border-style:solid;border-color:darkgrey;"><a title='Category Search for Card Draw' href="/Cards/Search?Category=Card&#x2B;Draw" style="text-decoration:none;">Card Draw</a></span>
+                <span style="display:inline-block;margin-top:4px;margin-bottom:4px;margin-left:8px;border-radius:6px;border-width:2px;border-style:solid;border-color:darkgrey;"><a title='Category Search for Direct Damage' href="/Cards/Search?Category=Direct&#x2B;Damage" style="text-decoration:none;">Direct Damage</a></span>
+                <span style="display:inline-block;margin-top:4px;margin-bottom:4px;margin-left:8px;border-radius:6px;border-width:2px;border-style:solid;border-color:darkgrey;"><a title='Category Search for Threat Control' href="/Cards/Search?Category=Threat&#x2B;Control" style="text-decoration:none;">Threat Control</a></span>
+                <span style="display:inline-block;margin-top:4px;margin-bottom:4px;margin-left:8px;border-radius:6px;border-width:2px;border-style:solid;border-color:darkgrey;"><a title='Category Search for Enters Play' href="/Cards/Search?Category=Enters&#x2B;Play" style="text-decoration:none;">Enters Play</a></span>
+            <br />
+            <div style="font-weight:bold;margin-left:6px;margin-top:10px;margin-bottom:4px;">Archetypes</div>
+                <span style="display:inline-block;margin-top:4px;margin-bottom:4px;margin-left:8px;border-radius:6px;border-width:2px;border-style:solid;border-color:darkgrey;"><a title='Archetype Search for Vilya Champions' href="/LotR?Archetype=Vilya&#x2B;Champions" style="text-decoration:none;">Vilya Champions</a></span>
+            <div class="ringsdb-card-link"><a title="Gandalf on RingsDB" href="http://ringsdb.com/card/01073" target="_blank"><img src="/Images/RingsDB.jpg" class="ringsdb-icon" height="16" width="16" loading="lazy" /><span>View this card on RingsDB</span></a></div>
+            <div class="ringsdb-card-link"><span>Popularity:&nbsp;&nbsp;</span><b>10</b>&nbsp;<img src='/Images/gold-ring.png' class='icon-Popularity' height='16' width='16' title='Popularity 10/10  (Rank 3666635)' loading='lazy' /></div>
+            <div class="ringsdb-card-link"><span>Efficiency: 8 ★</span></div>
+        </div>
+        <div>
+                <div>
+                    <div style="margin-top:12px;"><b>Community Content</b></div>
+                        <div style="margin: 4px;display:inline-block;background-color:black;color:white">
+                            <a href="https://cardtalk2018.libsyn.com/core-gandalf" target="_blank" title="Core Gandalf">
+                                <img src="https://hallofbeorn-resources.s3.amazonaws.com/Images/LotR/Partners/Card-Talk.jpg" title="Core Gandalf" height="118" loading="lazy" />
+                            </a>
+                            <div style="text-align:center;">Core Gandalf</div>
+                        </div>
+                        <div style="margin: 4px;display:inline-block;background-color:black;color:white">
+                            <a href="https://bookofelessar.com/decks/shadows-of-mirkwood-decks/the-hunt-for-gollum/" target="_blank" title="Hunt for Gollum">
+                                <img src="https://hallofbeorn-resources.s3.amazonaws.com/Images/LotR/Partners/The-Book-of-Elessar.jpg" title="Hunt for Gollum" height="118" loading="lazy" />
+                            </a>
+                            <div style="text-align:center;">Hunt for Gollum</div>
+                        </div>
+                        <div style="margin: 4px;display:inline-block;background-color:black;color:white">
+                            <a href="https://bookofelessar.com/decks/shadows-of-mirkwood-decks/conflict-at-the-carrock/" target="_blank" title="Conflict at the Carrock">
+                                <img src="https://hallofbeorn-resources.s3.amazonaws.com/Images/LotR/Partners/The-Book-of-Elessar.jpg" title="Conflict at the Carrock" height="118" loading="lazy" />
+                            </a>
+                            <div style="text-align:center;">Conflict at the Carrock</div>
+                        </div>
+                        <div style="margin: 4px;display:inline-block;background-color:black;color:white">
+                            <a href="https://bookofelessar.com/decks/shadows-of-mirkwood-decks/the-dead-marshes/" target="_blank" title="The Dead Marshes">
+                                <img src="https://hallofbeorn-resources.s3.amazonaws.com/Images/LotR/Partners/The-Book-of-Elessar.jpg" title="The Dead Marshes" height="118" loading="lazy" />
+                            </a>
+                            <div style="text-align:center;">The Dead Marshes</div>
+                        </div>
+                        <div style="margin: 4px;display:inline-block;background-color:black;color:white">
+                            <a href="https://bookofelessar.com/decks/shadows-of-mirkwood-decks/return-to-mirkwood/" target="_blank" title="The Return to Mirkwood">
+                                <img src="https://hallofbeorn-resources.s3.amazonaws.com/Images/LotR/Partners/The-Book-of-Elessar.jpg" title="The Return to Mirkwood" height="118" loading="lazy" />
+                            </a>
+                            <div style="text-align:center;">The Return to Mirkwood</div>
+                        </div>
+                </div>
+                <div class="footer-section">
+                <div style="margin-top:12px;"><b>Associated Cards</b></div>
+                        <div><a href="/LotR/Details/Dwarven-Axe-Core" title="Dwarven Axe (Core)" target="_blank">Dwarven Axe (Core)</a></div>
+                        <div><a href="/LotR/Details/Radagast&#x27;s-Cunning-Core" title="Radagast&#x27;s Cunning (Core)" target="_blank">Radagast&#x27;s Cunning (Core)</a></div>
+                        <div><a href="/LotR/Details/Longbeard-Orc-Slayer-Core" title="Longbeard Orc Slayer (Core)" target="_blank">Longbeard Orc Slayer (Core)</a></div>
+                        <div><a href="/LotR/Details/Ever-Vigilant-Core" title="Ever Vigilant (Core)" target="_blank">Ever Vigilant (Core)</a></div>
+                        <div><a href="/LotR/Details/Durin&#x27;s-Song-KD" title="Durin&#x27;s Song (KD)" target="_blank">Durin&#x27;s Song (KD)</a></div>
+                        <div><a href="/LotR/Details/Silverlode-Archer-Core" title="Silverlode Archer (Core)" target="_blank">Silverlode Archer (Core)</a></div>
+                        <div><a href="/LotR/Details/Dwarrowdelf-Axe-KD" title="Dwarrowdelf Axe (KD)" target="_blank">Dwarrowdelf Axe (KD)</a></div>
+                        <div><a href="/LotR/Details/Khazad-Khazad-KD" title="Khaz&#xE2;d! Khaz&#xE2;d! (KD)" target="_blank">Khaz&#xE2;d! Khaz&#xE2;d! (KD)</a></div>
+                        <div><a href="/LotR/Details/Wandering-Took-Core" title="Wandering Took (Core)" target="_blank">Wandering Took (Core)</a></div>
+                        <div><a href="/LotR/Details/Swift-Strike-Core" title="Swift Strike (Core)" target="_blank">Swift Strike (Core)</a></div>
+                </div>
+            <div class="footer-section">
+                    <div class="footer-title"><b>References</b></div>
+                        <div><a href="https://en.wikipedia.org/wiki/Gandalf" title="Wikipedia" target="_blank">Wikipedia</a></div>
+                        <div><a href="http://tolkiengateway.net/wiki/Gandalf" title="Tolkien Gateway" target="_blank">Tolkien Gateway</a></div>
+                        <div><a href="http://lotr.wikia.com/wiki/Gandalf" title="Lord of the Rings Wiki" target="_blank">Lord of the Rings Wiki</a></div>
+                        <div><a href="http://www.glyphweb.com/arda/search.asp?search=Gandalf" title="Encyclopedia of Arda" target="_blank">Encyclopedia of Arda</a></div>
+            </div>
+            <div id="deck-section" class="footer-section" style="display:none;">
+                <div class="footer-title"><b><a href="https://ringsdb.com" title="Recent Decks with this card on RingsDB" target="_blank"><img src="/Images/RingsDB.jpg" class="ringsdb-icon" height="16" width="16" loading="lazy" />Recent RingsDB Decks</a></b></div>
+                <div id="deck-list"></div>
+            </div>
+        <div>
+            <img title="OCTGN ID: 51223bd0-ffd1-11df-a976-0801200c9073" src="/Images/octgn-logo.png" style="margin-top: 12px;" height="25" width="25" loading="lazy" />
+        </div>
+    </div>
+</div>
+
+    </section>
+  </div>
+  <footer>
+    <div class="content-wrapper">
+      <div class="float-left">
+        <p>Card scans thanks to GeckoTH, Mr. Underhill, Leara &amp; Björn, Lepcis Magna, <a title="A Podcast about The Lord of the Rings... which is a Living Card Game" href="https://cardboardoftherings.com/" target="_blank">Cardboard of the Rings</a>, and the Lord of the Rings LCG Community. Quest map thanks to Ecthelion. Deck and card popularity data is kindly supplied by <a href="http://ringsdb.com/" title="RingsDB Deckbuilder for The Lord of the Rings LCG" target="_blank">RingsDB</a>. Scenario difficulty data is provided by <a href="http://www.lotr-lcg-quest-companion.gamersdungeon.net/home.html" title="The Lord of the Rings LCG Quest Companion" target="_blank">The LotR LCG Quest Companion</a>.</p>
+        <p>This website is not produced, endorsed, supported, or affiliated with Fantasy Flight Games. The copyrightable portions of The Lord of the Rings: The Card Game and its expansions are © 2011 - 2026 Fantasy Flight Publishing, Inc. The Lord of the Rings, and the characters, items, events and places therein are trademarks or registered trademarks of The Saul Zaentz Company d/b/a Middle-earth Enterprises and are used, under license, by Fantasy Flight Games. Living Card Game, LCG, LCG logo and Fantasy Flight Supply are trademarks and/or registered trademarks of Fantasy Flight Publishing, Inc. All Rights Reserved to their respective owners.</p>
+      </div>
+    </div>
+  </footer>
+  
+<script type="text/javascript" src="/Scripts/cardDetails-1.0.1.js"></script>
+<script>
+  function CardImageError_Handler(cardImage) {
+    cardImage.closest('div').classList.add('border', 'border-danger', 'border-1');
+    let numErrors = parseInt(cardImage.dataset.errors);
+    if (!isNaN(numErrors)) {
+			numErrors++;
+			cardImage.dataset.errors = numErrors;
+		}
+		else {
+			cardImage.dataset.errors = 1;
+		}
+    if (numErrors > 7)
+      return;
+
+    if (cardImage.src == cardImage.dataset.thumbSrc)
+			cardImage.src = cardImage.dataset.src;
+    else if (cardImage.src.includes(".avif"))
+      cardImage.src = cardImage.src.replace(".avif", ".png");
+    else if (cardImage.src.includes(".png"))
+      cardImage.src = cardImage.src.replace(".png", ".jpg");
+    else if (!cardImage.src.endsWith(cardImage.dataset.strippedSrc))
+      cardImage.src = cardImage.dataset.strippedSrc;
+    else if (!cardImage.src.startsWith("https://s3.amazonaws.com"))
+      cardImage.src = "https://s3.amazonaws.com/hallofbeorn-resources" + cardImage.dataset.src;
+  }
+
+  function CardImageLoad_Handler(cardImage) {
+    cardImage.closest('div').classList.remove('border');
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    let cardImages = document.querySelectorAll('img.card-image');
+    cardImages.forEach((cardImage) => {
+      if (cardImage.dataset.thumbSrc)
+        cardImage.src = cardImage.dataset.thumbSrc;
+      else
+        cardImage.src = cardImage.dataset.src;
+		});
+  });
+</script>
+
+</body>
+</html>

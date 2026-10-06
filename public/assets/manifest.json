@@ -1,0 +1,281 @@
+{
+  "cardDimensions": {
+    "width": 756,
+    "height": 1063
+  },
+  "spheres": [
+    "neutral",
+    "leadership",
+    "tactics",
+    "spirit",
+    "lore"
+  ],
+  "types": {
+    "hero": {
+      "templates": {
+        "neutral": "templates/hero_neutral.png",
+        "leadership": "templates/hero_leadership.png",
+        "tactics": "templates/hero_tactics.png",
+        "spirit": "templates/hero_spirit.png",
+        "lore": "templates/hero_lore.png"
+      }
+    },
+    "attachment": {
+      "templates": {
+        "neutral": "templates/attachment_neutral.png",
+        "leadership": "templates/attachment_leadership.png",
+        "tactics": "templates/attachment_tactics.png",
+        "spirit": "templates/attachment_spirit.png",
+        "lore": "templates/attachment_lore.png"
+      }
+    },
+    "event": {
+      "templates": {
+        "neutral": "templates/event_neutral.png",
+        "leadership": "templates/event_leadership.png",
+        "tactics": "templates/event_tactics.png",
+        "spirit": "templates/event_spirit.png",
+        "lore": "templates/event_lore.png"
+      }
+    },
+    "enemy": {
+      "template": "templates/enemy.png"
+    },
+    "location": {
+      "template": "templates/location.png"
+    },
+    "treachery": {
+      "template": "templates/treachery.png"
+    },
+    "objective": {
+      "templates": {
+        "item": "templates/objective_item.png",
+        "ally": "templates/objective_ally.png"
+      }
+    },
+    "treasure": {
+      "template": "templates/treasure.png"
+    },
+    "quest": {
+      "templates": {
+        "sideA": "templates/quest_side_a.png",
+        "sideB": "templates/quest_side_b.png"
+      }
+    },
+    "ally": {
+      "templates": {
+        "neutral": "templates/ally_neutral.png",
+        "leadership": "templates/ally_leadership.png",
+        "tactics": "templates/ally_tactics.png",
+        "spirit": "templates/ally_spirit.png",
+        "lore": "templates/ally_lore.png"
+      }
+    }
+  },
+  "encounterSets": [
+    {
+      "id": "misty_mountains",
+      "name": "Misty Mountains",
+      "icon": "icons/encounter_misty_mountains.png"
+    },
+    {
+      "id": "deeps_of_moria",
+      "name": "Deeps of Moria",
+      "icon": "icons/encounter_deeps_of_moria.png"
+    },
+    {
+      "id": "flight_from_moria",
+      "name": "Flight from Moria",
+      "icon": "icons/encounter_flight_from_moria.png"
+    },
+    {
+      "id": "plundering_goblins",
+      "name": "Plundering Goblins",
+      "icon": "icons/encounter_plundering_goblins.png"
+    },
+    {
+      "id": "7th_level",
+      "name": "7th Level",
+      "icon": "icons/encounter_7th_level.png"
+    },
+    {
+      "id": "goblins_in_the_deep",
+      "name": "Goblins in the Deep",
+      "icon": "icons/encounter_goblins_in_the_deep.png"
+    },
+    {
+      "id": "hazards_of_the_pit",
+      "name": "Hazards of the Pit",
+      "icon": "icons/encounter_hazards_of_the_pit.png"
+    },
+    {
+      "id": "twists_and_turns",
+      "name": "Twists and Turns",
+      "icon": "icons/encounter_twists_and_turns.png"
+    },
+    {
+      "id": "into_the_pit",
+      "name": "Into the Pit",
+      "icon": "icons/encounter_into_the_pit.png"
+    },
+    {
+      "id": "osgiliath",
+      "name": "Osgiliath",
+      "icon": "icons/encounter_osgiliath.png"
+    },
+    {
+      "id": "return_to_mirkwood",
+      "name": "Return to Mirkwood",
+      "icon": "icons/encounter_return_to_mirkwood.png"
+    },
+    {
+      "id": "dead_marshes",
+      "name": "Dead Marshes",
+      "icon": "icons/encounter_dead_marshes.png"
+    },
+    {
+      "id": "rhosgobel",
+      "name": "Rhosgobel",
+      "icon": "icons/encounter_rhosgobel.png"
+    },
+    {
+      "id": "emen_muil",
+      "name": "Emen Muil",
+      "icon": "icons/encounter_emen_muil.png"
+    },
+    {
+      "id": "carrock",
+      "name": "Carrock",
+      "icon": "icons/encounter_carrock.png"
+    },
+    {
+      "id": "gollum",
+      "name": "Gollum",
+      "icon": "icons/encounter_gollum.png"
+    },
+    {
+      "id": "dulguldur",
+      "name": "DulGuldur",
+      "icon": "icons/encounter_dulguldur.png"
+    },
+    {
+      "id": "anduin",
+      "name": "Anduin",
+      "icon": "icons/encounter_anduin.png"
+    },
+    {
+      "id": "wilds",
+      "name": "Wilds",
+      "icon": "icons/encounter_wilds.png"
+    },
+    {
+      "id": "eyeofsauron",
+      "name": "EyeofSauron",
+      "icon": "icons/encounter_eyeofsauron.png"
+    },
+    {
+      "id": "orcs",
+      "name": "Orcs",
+      "icon": "icons/encounter_orcs.png"
+    },
+    {
+      "id": "spiders",
+      "name": "Spiders",
+      "icon": "icons/encounter_spiders.png"
+    },
+    {
+      "id": "mirkwood",
+      "name": "Mirkwood",
+      "icon": "icons/encounter_mirkwood.png"
+    },
+    {
+      "id": "goblins_of_the_deep",
+      "name": "Goblins of the Deep",
+      "icon": "icons/encounter_goblins_of_the_deep.png"
+    },
+    {
+      "id": "dungeons_deep_and_caverns_dim",
+      "name": "Dungeons Deep and Caverns Dim",
+      "icon": "icons/encounter_dungeons_deep_and_caverns_dim.png"
+    },
+    {
+      "id": "great_goblin",
+      "name": "Great Goblin",
+      "icon": "icons/encounter_great_goblin.png"
+    },
+    {
+      "id": "misty_mountain_goblins",
+      "name": "Misty Mountain Goblins",
+      "icon": "icons/encounter_misty_mountain_goblins.png"
+    },
+    {
+      "id": "over_the_misty_mountains_grim",
+      "name": "Over the Misty Mountains Grim",
+      "icon": "icons/encounter_over_the_misty_mountains_grim.png"
+    },
+    {
+      "id": "western_lands",
+      "name": "Western Lands",
+      "icon": "icons/encounter_western_lands.png"
+    },
+    {
+      "id": "we_must_away",
+      "name": "We Must Away",
+      "icon": "icons/encounter_we_must_away.png"
+    },
+    {
+      "id": "shadow_and_flame",
+      "name": "Shadow and Flame",
+      "icon": "icons/encounter_shadow_and_flame.png"
+    },
+    {
+      "id": "foundations_of_stone",
+      "name": "Foundations of Stone",
+      "icon": "icons/encounter_foundations_of_stone.png"
+    },
+    {
+      "id": "the_long_dark",
+      "name": "The Long Dark",
+      "icon": "icons/encounter_the_long_dark.png"
+    },
+    {
+      "id": "watcher_in_the_water",
+      "name": "Watcher in the Water",
+      "icon": "icons/encounter_watcher_in_the_water.png"
+    },
+    {
+      "id": "road_to_rivendell",
+      "name": "Road to Rivendell",
+      "icon": "icons/encounter_road_to_rivendell.png"
+    },
+    {
+      "id": "the_redhorn_gate",
+      "name": "The Redhorn Gate",
+      "icon": "icons/encounter_the_redhorn_gate.png"
+    },
+    {
+      "id": "dolguldur",
+      "name": "DolGuldur",
+      "icon": "icons/encounter_dolguldur.png"
+    },
+    {
+      "id": "attack_on_dol_guldur",
+      "name": "Attack on Dol Guldur",
+      "icon": "icons/Attack-on-Dol-Guldur.png"
+    }
+  ],
+  "icons": {
+    "sphere_lore": "icons/sphere_lore.png",
+    "sphere_tactics": "icons/sphere_tactics.png",
+    "sphere_spirit": "icons/sphere_spirit.png",
+    "sphere_leadership": "icons/sphere_leadership.png",
+    "threaticon": "icons/threaticon.png",
+    "strengthicon": "icons/strengthicon.png",
+    "attackicon": "icons/attackicon.png",
+    "willpowericon": "icons/willpowericon.png",
+    "unique_symbol": "icons/unique_symbol.png",
+    "ring_deck_logo": "icons/ring_deck_logo.png",
+    "shadow_symbol": "icons/shadow_symbol.png",
+    "card_number_bg": "icons/card_number_bg.png"
+  }
+}
